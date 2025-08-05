@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8" />
@@ -17,17 +17,18 @@
             max-width: 900px;
             margin: 30px auto;
             background: #fff;
-            border-radius: 10px;
+            border-radius: 15px;
             box-shadow: 0 0 10px #bbb;
             overflow: hidden;
         }
 
         .header {
-            background: #1857b2;
+            background: #1e5aa8;
             color: #fff;
             text-align: center;
             padding: 20px;
             position: relative;
+            border-radius: 15px 15px 0 0;
         }
 
         .header h1 {
@@ -49,17 +50,17 @@
         .logo img {
             height: 100%;
             width: auto;
-            filter: brightness(0) invert(1); /* Torna o logo branco */
+            filter: brightness(0) invert(1);
         }
 
         .curso-titulo {
-            background: #e6eaf3;
-            color: #1857b2;
+            background: #e8e8e8;
+            color: #1e5aa8;
             text-align: center;
             padding: 15px;
             font-weight: bold;
             font-size: 1.1em;
-            border-bottom: 3px solid #1857b2;
+            border-bottom: none;
         }
 
         .form-section {
@@ -70,123 +71,169 @@
             display: block;
             margin-top: 18px;
             font-weight: bold;
-            color: #1857b2;
+            color: #1e5aa8;
         }
 
         select, input[type="date"], button {
             width: 100%;
             padding: 10px;
             margin-top: 6px;
-            border: 1px solid #1857b2;
-            border-radius: 4px;
+            border: 1px solid #1e5aa8;
+            border-radius: 8px;
             font-size: 1em;
             box-sizing: border-box;
         }
 
         button {
-            background: #1857b2;
+            background: #1e5aa8;
             color: white;
             border: none;
             margin-top: 20px;
             cursor: pointer;
             font-weight: bold;
+            border-radius: 8px;
         }
 
         button:hover {
-            background: #144a92;
+            background: #003880;
         }
 
         .cronograma-box {
-            margin: 20px 0 0 0;
+            margin: 0;
             display: none;
         }
 
         .cronograma-tabela {
             width: 100%;
-            border-collapse: separate;
-            border-spacing: 3px;
-            background: #1857b2;
-            padding: 10px;
+            border-collapse: collapse;
+            border-spacing: 0;
+            background: transparent;
+            margin: 0;
         }
 
         .cronograma-tabela th {
-            background: #1857b2;
+            background: #1e5aa8;
             color: #fff;
             padding: 12px 8px;
             text-align: center;
-            font-size: 0.95em;
+            font-size: 0.9em;
             font-weight: bold;
-            border-radius: 4px;
+            border: 1px solid #fff;
+            vertical-align: middle;
         }
 
         .cronograma-tabela td {
-            padding: 15px 10px;
             text-align: center;
-            font-size: 0.9em;
-            border-radius: 4px;
+            vertical-align: middle;
+            padding: 12px 8px;
+            font-size: 0.85em;
+            border: 1px solid #fff;
         }
 
-        .uc-cell {
-            background: #1857b2;
+        /* Cabeçalhos específicos */
+        .cronograma-tabela th:nth-child(1) {
+            width: 200px;
+        }
+
+        .cronograma-tabela th:nth-child(2) {
+            width: 250px;
+        }
+
+        .cronograma-tabela th:nth-child(3) {
+            width: 150px;
+        }
+
+        .cronograma-tabela th:nth-child(4),
+        .cronograma-tabela th:nth-child(5) {
+            width: 100px;
+        }
+
+        /* Segunda linha do cabeçalho */
+        .cronograma-tabela thead tr:nth-child(2) th {
+            background: #1e5aa8;
             color: #fff;
             font-weight: bold;
             font-size: 0.85em;
+        }
+
+        .uc-cell {
+            background: #1e5aa8;
+            color: #fff;
+            font-weight: bold;
+            font-size: 0.8em;
             line-height: 1.3;
-            vertical-align: top;
-            width: 180px;
+            text-align: center;
+            padding: 15px 8px;
         }
 
         .atividade-cell {
-            background: #e6eaf3;
-            color: #222;
-            font-size: 0.85em;
+            background: #e8e8e8;
+            color: #000;
+            font-size: 0.8em;
+            text-align: left;
+            padding: 10px;
             line-height: 1.4;
         }
 
         .tipo-cell {
-            background: #e6eaf3;
-            color: #222;
-            font-size: 0.85em;
+            background: #e8e8e8;
+            color: #000;
+            font-size: 0.8em;
+            text-align: center;
+            padding: 10px;
         }
 
-        .periodo-cell {
-            background: #ff7f2a;
+        .periodo-de-cell {
+            background: #1e5aa8;
             color: #fff;
             font-weight: bold;
-            font-size: 0.9em;
-            width: 120px;
+            font-size: 0.85em;
+            text-align: center;
+        }
+
+        .periodo-ate-cell {
+            background: #f58220;
+            color: #fff;
+            font-weight: bold;
+            font-size: 0.85em;
+            text-align: center;
         }
 
         .parcial-row td {
-            background: #1857b2 !important;
+            background: #1e5aa8 !important;
             color: #fff !important;
             font-weight: bold;
+            text-align: center;
         }
 
         .recuperacao-row td {
-            background: #ff7f2a !important;
+            background: #f58220 !important;
             color: #fff !important;
             font-weight: bold;
+            text-align: center;
         }
 
-        .encontro-info {
-            background: #e6eaf3;
-            padding: 15px;
+        .encontro-row td {
+            background: #e8e8e8 !important;
+            color: #1e5aa8 !important;
+            font-weight: bold;
             text-align: center;
             font-size: 0.85em;
-            color: #1857b2;
+        }
+
+        .encontro-row .horarios {
+            color: #f58220 !important;
             font-weight: bold;
-            margin: 10px;
-            border-radius: 4px;
         }
 
         .footer {
-            background: #1857b2;
+            background: #1e5aa8;
             color: #fff;
             text-align: center;
             padding: 15px;
             font-size: 0.9em;
             line-height: 1.4;
+            border-radius: 0 0 15px 15px;
         }
 
         .nd {
@@ -197,7 +244,7 @@
         .loading {
             text-align: center;
             padding: 20px;
-            color: #1857b2;
+            color: #1e5aa8;
             font-style: italic;
         }
 
@@ -206,8 +253,31 @@
             background: #f8d7da;
             border: 1px solid #f5c6cb;
             padding: 10px;
-            border-radius: 4px;
+            border-radius: 8px;
             margin: 10px 0;
+        }
+
+        /* Para ter bordas consistentes */
+        .cronograma-tabela th,
+        .cronograma-tabela td {
+            border: 1px solid #fff;
+        }
+
+        /* Rounded corners for table */
+        .cronograma-tabela thead tr:first-child th:first-child {
+            border-top-left-radius: 8px;
+        }
+
+        .cronograma-tabela thead tr:first-child th:last-child {
+            border-top-right-radius: 8px;
+        }
+
+        .cronograma-tabela tbody tr:last-child td:first-child {
+            border-bottom-left-radius: 8px;
+        }
+
+        .cronograma-tabela tbody tr:last-child td:last-child {
+            border-bottom-right-radius: 8px;
         }
     </style>
 </head>
@@ -248,50 +318,45 @@
             <table class="cronograma-tabela">
                 <thead>
                     <tr>
-                        <th style="width: 180px;">Unidade Curricular<br>(UC)</th>
-                        <th style="width: 200px;">Atividade</th>
-                        <th style="width: 140px;">Tipo de entrega</th>
-                        <th colspan="2" style="background: #1857b2; color: #fff;">Período de entrega</th>
+                        <th rowspan="2">Unidade Curricular<br>(UC)</th>
+                        <th rowspan="2">Atividade</th>
+                        <th rowspan="2">Tipo de entrega</th>
+                        <th colspan="2">Período de entrega</th>
                     </tr>
                     <tr>
-                        <th style="background: transparent;"></th>
-                        <th style="background: transparent;"></th>
-                        <th style="background: transparent;"></th>
-                        <th style="width: 120px;">De</th>
-                        <th style="width: 120px;">Até</th>
+                        <th>De</th>
+                        <th>Até</th>
                     </tr>
                 </thead>
                 <tbody id="cronogramaTbody">
                     <tr>
-                        <td id="tdUC" class="uc-cell nd" rowspan="3">#N/D</td>
+                        <td id="tdUC" class="uc-cell nd" rowspan="4">#N/D</td>
                         <td id="tdAtividade" class="atividade-cell nd">#N/D</td>
                         <td id="tdTipoEntrega" class="tipo-cell nd">#N/D</td>
-                        <td id="tdData" class="periodo-cell nd">#N/D</td>
-                        <td id="tdDataAte" class="periodo-cell nd">#N/D</td>
+                        <td id="tdData" class="periodo-de-cell nd">#N/D</td>
+                        <td id="tdDataAte" class="periodo-ate-cell nd">#N/D</td>
                     </tr>
                     <tr class="parcial-row">
-                        <td>Registro da Menção Parcial</td>
-                        <td>#N/D</td>
+                        <td colspan="2">Registro da Menção Parcial</td>
                         <td>#N/D</td>
                         <td>#N/D</td>
                     </tr>
                     <tr class="recuperacao-row">
-                        <td>Recuperação</td>
-                        <td>#N/D</td>
+                        <td colspan="2">Recuperação</td>
                         <td>#N/D</td>
                         <td>#N/D</td>
                     </tr>
+                    <tr class="encontro-row">
+                        <td colspan="2">
+                            <strong>Encontro com o(a) Tutor(a)</strong><br>
+                            <strong>(Horário de Brasília)</strong>
+                        </td>
+                        <td colspan="2">
+                            <span class="horarios">Terças-feiras - 18h às 19h<br>Quintas-feiras - 14h às 15h</span>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
-            
-            <div class="encontro-info">
-                <div><strong>Encontro com o(a) Tutor(a)</strong></div>
-                <div><strong>(Horário de Brasília)</strong></div>
-                <div style="margin-top: 10px; color: #ff7f2a; font-weight: bold;">
-                    Terças-feiras - 18h às 19h<br>
-                    Quintas-feiras - 14h às 15h
-                </div>
-            </div>
         </div>
 
         <div class="footer">
@@ -456,68 +521,78 @@
             
             const dtRecuperacaoFim = new Date(dtFim);
 
-            // Montar conteúdo da primeira coluna UC (limitando a descrição para melhor visualização)
-            const descricaoLimitada = dado.descricao.length > 40 ? 
-                dado.descricao.substring(0, 40) + '...' : dado.descricao;
-            
-            const ucContent = `${dado.uc} - ${descricaoLimitada}<br><br><strong>Período da ${dado.uc}:</strong><br>${dtInicio.toLocaleDateString('pt-BR')} até<br>${dtFim.toLocaleDateString('pt-BR')}`;
+            // Montar conteúdo da primeira coluna UC
+            const ucContent = `${dado.uc} - ${dado.descricao}<br><br><strong>Período da UC:</strong><br>${dtInicio.toLocaleDateString('pt-BR')} até<br>${dtFim.toLocaleDateString('pt-BR')}`;
 
-            // Criar linhas das atividades
-            dado.entrega.forEach((atividade, index) => {
-                const tr = document.createElement('tr');
-                
-                if (index === 0) {
-                    const tdUC = document.createElement('td');
-                    tdUC.className = 'uc-cell';
-                    tdUC.innerHTML = ucContent;
-                    tdUC.rowSpan = dado.entrega.length + 2;
-                    tr.appendChild(tdUC);
-                }
-                
-                const tdAtividade = document.createElement('td');
-                tdAtividade.className = 'atividade-cell';
-                tdAtividade.textContent = atividade;
-                tr.appendChild(tdAtividade);
-                
-                const tdTipo = document.createElement('td');
-                tdTipo.className = 'tipo-cell';
-                tdTipo.textContent = dado.modelo[index] || 'Tarefa';
-                tr.appendChild(tdTipo);
-                
-                const tdDe = document.createElement('td');
-                tdDe.className = 'periodo-cell';
-                tdDe.textContent = index === 0 ? dtInicio.toLocaleDateString('pt-BR') : '-';
-                tr.appendChild(tdDe);
-                
-                const tdAte = document.createElement('td');
-                tdAte.className = 'periodo-cell';
-                tdAte.textContent = index === 0 ? dtEntregaFim.toLocaleDateString('pt-BR') : '-';
-                tr.appendChild(tdAte);
-                
-                tbody.appendChild(tr);
-            });
+            // Criar primeira linha principal com todas as atividades
+            const row1 = document.createElement('tr');
+            
+            // UC com rowspan=4 (incluindo todas as 4 linhas)
+            const tdUC = document.createElement('td');
+            tdUC.className = 'uc-cell';
+            tdUC.innerHTML = ucContent;
+            tdUC.rowSpan = 4;
+            row1.appendChild(tdUC);
+            
+            // Atividades - todas em uma célula com quebras de linha
+            const tdAtividades = document.createElement('td');
+            tdAtividades.className = 'atividade-cell';
+            tdAtividades.innerHTML = dado.entrega.join('<br>');
+            row1.appendChild(tdAtividades);
+            
+            // Tipos - todos em uma célula com quebras de linha
+            const tdTipos = document.createElement('td');
+            tdTipos.className = 'tipo-cell';
+            tdTipos.innerHTML = dado.modelo.map(modelo => modelo || 'Tarefa').join('<br>');
+            row1.appendChild(tdTipos);
+            
+            // Data De
+            const tdDe = document.createElement('td');
+            tdDe.className = 'periodo-de-cell';
+            tdDe.textContent = dtInicio.toLocaleDateString('pt-BR');
+            row1.appendChild(tdDe);
+            
+            // Data Até
+            const tdAte = document.createElement('td');
+            tdAte.className = 'periodo-ate-cell';
+            tdAte.textContent = dtEntregaFim.toLocaleDateString('pt-BR');
+            row1.appendChild(tdAte);
+            
+            tbody.appendChild(row1);
 
             // Linha Menção Parcial
-            const trParcial = document.createElement('tr');
-            trParcial.className = 'parcial-row';
-            trParcial.innerHTML = `
-                <td>Registro da Menção Parcial</td>
-                <td>#N/D</td>
+            const row2 = document.createElement('tr');
+            row2.className = 'parcial-row';
+            row2.innerHTML = `
+                <td colspan="2">Registro da Menção Parcial</td>
                 <td>${dtParcialInicio.toLocaleDateString('pt-BR')}</td>
                 <td>${dtParcialFim.toLocaleDateString('pt-BR')}</td>
             `;
-            tbody.appendChild(trParcial);
+            tbody.appendChild(row2);
 
             // Linha Recuperação
-            const trRecup = document.createElement('tr');
-            trRecup.className = 'recuperacao-row';
-            trRecup.innerHTML = `
-                <td>Recuperação</td>
-                <td>#N/D</td>
+            const row3 = document.createElement('tr');
+            row3.className = 'recuperacao-row';
+            row3.innerHTML = `
+                <td colspan="2">Recuperação</td>
                 <td>${dtRecuperacaoInicio.toLocaleDateString('pt-BR')}</td>
                 <td>${dtRecuperacaoFim.toLocaleDateString('pt-BR')}</td>
             `;
-            tbody.appendChild(trRecup);
+            tbody.appendChild(row3);
+
+            // Linha Encontro com Tutor (quarta linha)
+            const row4 = document.createElement('tr');
+            row4.className = 'encontro-row';
+            row4.innerHTML = `
+                <td colspan="2">
+                    <strong>Encontro com o(a) Tutor(a)</strong><br>
+                    <strong>(Horário de Brasília)</strong>
+                </td>
+                <td colspan="2">
+                    <span class="horarios">Terças-feiras - 18h às 19h<br>Quintas-feiras - 14h às 15h</span>
+                </td>
+            `;
+            tbody.appendChild(row4);
 
             document.getElementById('cronogramaBox').style.display = 'block';
             
