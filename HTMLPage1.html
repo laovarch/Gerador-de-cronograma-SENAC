@@ -1,0 +1,524 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Cronograma de Estudos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #bbb;
+            overflow: hidden;
+        }
+
+        .header {
+            background: #1857b2;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.8em;
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+
+        .logo {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #fff;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .curso-titulo {
+            background: #e6eaf3;
+            color: #1857b2;
+            text-align: center;
+            padding: 15px;
+            font-weight: bold;
+            font-size: 1.1em;
+            border-bottom: 3px solid #1857b2;
+        }
+
+        .form-section {
+            padding: 30px 40px 20px 40px;
+        }
+
+        form label {
+            display: block;
+            margin-top: 18px;
+            font-weight: bold;
+            color: #1857b2;
+        }
+
+        select, input[type="date"], button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            border: 1px solid #1857b2;
+            border-radius: 4px;
+            font-size: 1em;
+            box-sizing: border-box;
+        }
+
+        button {
+            background: #1857b2;
+            color: white;
+            border: none;
+            margin-top: 20px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #144a92;
+        }
+
+        .cronograma-box {
+            margin: 20px 0 0 0;
+            display: none;
+        }
+
+        .cronograma-tabela {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 3px;
+            background: #1857b2;
+            padding: 10px;
+        }
+
+        .cronograma-tabela th {
+            background: #1857b2;
+            color: #fff;
+            padding: 12px 8px;
+            text-align: center;
+            font-size: 0.95em;
+            font-weight: bold;
+            border-radius: 4px;
+        }
+
+        .cronograma-tabela td {
+            padding: 15px 10px;
+            text-align: center;
+            font-size: 0.9em;
+            border-radius: 4px;
+        }
+
+        .uc-cell {
+            background: #1857b2;
+            color: #fff;
+            font-weight: bold;
+            font-size: 0.85em;
+            line-height: 1.3;
+            vertical-align: top;
+            width: 180px;
+        }
+
+        .atividade-cell {
+            background: #e6eaf3;
+            color: #222;
+            font-size: 0.85em;
+            line-height: 1.4;
+        }
+
+        .tipo-cell {
+            background: #e6eaf3;
+            color: #222;
+            font-size: 0.85em;
+        }
+
+        .periodo-cell {
+            background: #ff7f2a;
+            color: #fff;
+            font-weight: bold;
+            font-size: 0.9em;
+            width: 120px;
+        }
+
+        .parcial-row td {
+            background: #1857b2 !important;
+            color: #fff !important;
+            font-weight: bold;
+        }
+
+        .recuperacao-row td {
+            background: #ff7f2a !important;
+            color: #fff !important;
+            font-weight: bold;
+        }
+
+        .encontro-info {
+            background: #e6eaf3;
+            padding: 15px;
+            text-align: center;
+            font-size: 0.85em;
+            color: #1857b2;
+            font-weight: bold;
+            margin: 10px;
+            border-radius: 4px;
+        }
+
+        .footer {
+            background: #1857b2;
+            color: #fff;
+            text-align: center;
+            padding: 15px;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+
+        .nd {
+            color: inherit;
+            font-style: italic;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #1857b2;
+            font-style: italic;
+        }
+
+        .error-message {
+            color: #dc3545;
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>CRONOGRAMA DE ESTUDOS</h1>
+            <div class="logo">SENAC</div>
+        </div>
+
+        <div class="curso-titulo" id="cursoTitulo">
+            Selecione um curso para visualizar o cronograma
+        </div>
+
+        <div class="form-section">
+            <div id="loading" class="loading">Carregando dados...</div>
+            <form id="formCronograma" style="display: none;">
+                <label for="curso">Curso</label>
+                <select id="curso" name="curso" required>
+                    <option value="">Selecione o curso</option>
+                </select>
+
+                <label for="uc">Unidade Curricular (UC)</label>
+                <select id="uc" name="uc" required>
+                    <option value="">Selecione a UC</option>
+                </select>
+
+                <label for="dataInicio">Dia de início da UC</label>
+                <input type="date" id="dataInicio" name="dataInicio" required>
+
+                <button type="button" id="btnGerar">Gerar Cronograma</button>
+            </form>
+        </div>
+
+        <div class="cronograma-box" id="cronogramaBox">
+            <table class="cronograma-tabela">
+                <thead>
+                    <tr>
+                        <th style="width: 180px;">Unidade Curricular<br>(UC)</th>
+                        <th style="width: 200px;">Atividade</th>
+                        <th style="width: 140px;">Tipo de entrega</th>
+                        <th colspan="2" style="background: #1857b2; color: #fff;">Período de entrega</th>
+                    </tr>
+                    <tr>
+                        <th style="background: transparent;"></th>
+                        <th style="background: transparent;"></th>
+                        <th style="background: transparent;"></th>
+                        <th style="width: 120px;">De</th>
+                        <th style="width: 120px;">Até</th>
+                    </tr>
+                </thead>
+                <tbody id="cronogramaTbody">
+                    <tr>
+                        <td id="tdUC" class="uc-cell nd" rowspan="3">#N/D</td>
+                        <td id="tdAtividade" class="atividade-cell nd">#N/D</td>
+                        <td id="tdTipoEntrega" class="tipo-cell nd">#N/D</td>
+                        <td id="tdData" class="periodo-cell nd">#N/D</td>
+                        <td id="tdDataAte" class="periodo-cell nd">#N/D</td>
+                    </tr>
+                    <tr class="parcial-row">
+                        <td>Registro da Menção Parcial</td>
+                        <td>#N/D</td>
+                        <td>#N/D</td>
+                        <td>#N/D</td>
+                    </tr>
+                    <tr class="recuperacao-row">
+                        <td>Recuperação</td>
+                        <td>#N/D</td>
+                        <td>#N/D</td>
+                        <td>#N/D</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="encontro-info">
+                <div><strong>Encontro com o(a) Tutor(a)</strong></div>
+                <div><strong>(Horário de Brasília)</strong></div>
+                <div style="margin-top: 10px; color: #ff7f2a; font-weight: bold;">
+                    Terças-feiras - 18h às 19h<br>
+                    Quintas-feiras - 14h às 15h
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            Atenção! Administre seu tempo de estudos e seu processo de aprendizagem.<br>
+            Sugerimos que você dedique 2h de estudos diárias para um bom desempenho no curso.
+        </div>
+    </div>
+
+    <!-- Carregar dados externos -->
+    <script src="dados_utf8.js" charset="UTF-8"></script>
+    
+    <script>
+        // Variável global para armazenar os dados processados
+        let dados = [];
+
+        // Função para normalizar texto (remover acentos e caracteres especiais para comparação)
+        function normalizarTexto(texto) {
+            return texto.toLowerCase()
+                        .normalize('NFD')
+                        .replace(/[\u0300-\u036f]/g, '');
+        }
+
+        // Função para sanitizar e corrigir caracteres especiais
+        function corrigirCaracteresEspeciais(texto) {
+            if (!texto) return '';
+            
+            // Mapeamento de caracteres mal codificados comuns
+            const correcoes = {
+                'Ã§': 'ç',
+                'Ã¡': 'á',
+                'Ã ': 'à',
+                'Ã©': 'é',
+                'Ãª': 'ê',
+                'Ã­': 'í',
+                'Ã³': 'ó',
+                'Ãµ': 'õ',
+                'Ãº': 'ú',
+                'Ã¢': 'â',
+                'Ã´': 'ô',
+                'Ã¼': 'ü',
+                'Ã±': 'ñ'
+            };
+            
+            let textoCorrigido = texto;
+            for (const [incorreto, correto] of Object.entries(correcoes)) {
+                textoCorrigido = textoCorrigido.replace(new RegExp(incorreto, 'g'), correto);
+            }
+            
+            return textoCorrigido;
+        }
+
+        // Função para inicializar a aplicação
+        function inicializarApp() {
+            try {
+                // Verificar se os dados foram carregados
+                if (typeof dadosOriginais === 'undefined') {
+                    throw new Error('Dados não foram carregados corretamente');
+                }
+
+                // Conversão dos dados para o formato esperado com correção de caracteres
+                dados = dadosOriginais.map(d => ({
+                    curso: corrigirCaracteresEspeciais((d["Cursos"] || d[" Cursos"] || "").trim()),
+                    uc: corrigirCaracteresEspeciais((d["UC"] || "").trim()),
+                    descricao: corrigirCaracteresEspeciais(d["Descrição 1"] || ""),
+                    semanas: d["Numero de semanas"] || "",
+                    entrega: (d["Entrega"] || "").split(/\s*\n\s*/).filter(Boolean).map(corrigirCaracteresEspeciais),
+                    modelo: (d["Modelo de cada tarefa"] || "").split(/\s*\n\s*/).filter(Boolean).map(corrigirCaracteresEspeciais)
+                }));
+
+                // Ocultar loading e mostrar formulário
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('formCronograma').style.display = 'block';
+
+                // Inicializar interface
+                preencherCursos();
+                configurarEventos();
+
+                console.log(`✅ Aplicação carregada com sucesso! ${dados.length} registros processados.`);
+
+            } catch (error) {
+                console.error('❌ Erro ao carregar a aplicação:', error);
+                document.getElementById('loading').innerHTML = 
+                    '<div class="error-message">Erro ao carregar os dados. Verifique se o arquivo dados.js está disponível e o encoding está correto.</div>';
+            }
+        }
+
+        // Função para preencher o select de cursos
+        function preencherCursos() {
+            const selectCurso = document.getElementById('curso');
+            const cursosUnicos = [...new Set(dados.map(d => d.curso.trim()))].filter(curso => curso);
+            
+            cursosUnicos.forEach(curso => {
+                const opt = document.createElement('option');
+                opt.value = curso;
+                opt.textContent = curso;
+                selectCurso.appendChild(opt);
+            });
+        }
+
+        // Função para configurar eventos
+        function configurarEventos() {
+            const selectCurso = document.getElementById('curso');
+            const selectUC = document.getElementById('uc');
+            const btnGerar = document.getElementById('btnGerar');
+            const cursoTitulo = document.getElementById('cursoTitulo');
+
+            selectCurso.addEventListener('change', function () {
+                const curso = this.value.trim();
+                cursoTitulo.textContent = curso || 'Selecione um curso para visualizar o cronograma';
+                selectUC.innerHTML = '<option value="">Selecione a UC</option>';
+                
+                dados.filter(d => d.curso.trim() === curso).forEach(d => {
+                    const opt = document.createElement('option');
+                    opt.value = d.uc;
+                    opt.textContent = `${d.uc} - ${d.descricao}`;
+                    selectUC.appendChild(opt);
+                });
+            });
+
+            btnGerar.addEventListener('click', gerarCronograma);
+        }
+
+        // Função para gerar o cronograma
+        function gerarCronograma() {
+            const curso = document.getElementById('curso').value;
+            const ucValue = document.getElementById('uc').value;
+            const dataInicio = document.getElementById('dataInicio').value;
+            
+            const dado = dados.find(
+                d => normalizarTexto(d.curso) === normalizarTexto(curso) &&
+                     normalizarTexto(d.uc) === normalizarTexto(ucValue)
+            );
+            
+            if (!dado || !dataInicio) {
+                alert('Por favor, preencha todos os campos');
+                return;
+            }
+
+            // Limpar e recriar tabela
+            const tbody = document.getElementById('cronogramaTbody');
+            tbody.innerHTML = '';
+
+            // Calcular datas com correção de fuso horário
+            const partesData = dataInicio.split('-');
+            const dtInicio = new Date(parseInt(partesData[0]), parseInt(partesData[1]) - 1, parseInt(partesData[2]));
+            const numeroSemanas = parseInt(dado.semanas);
+            
+            const dtFim = new Date(dtInicio);
+            dtFim.setDate(dtFim.getDate() + ((numeroSemanas + 1) * 7));
+            
+            const dtEntregaFim = new Date(dtInicio);
+            dtEntregaFim.setDate(dtEntregaFim.getDate() + ((numeroSemanas - 1) * 7));
+            
+            const dtParcialInicio = new Date(dtEntregaFim);
+            dtParcialInicio.setDate(dtParcialInicio.getDate() + 1);
+            
+            const dtParcialFim = new Date(dtParcialInicio);
+            dtParcialFim.setDate(dtParcialFim.getDate() + 3);
+            
+            const dtRecuperacaoInicio = new Date(dtEntregaFim);
+            dtRecuperacaoInicio.setDate(dtRecuperacaoInicio.getDate() + 7);
+            
+            const dtRecuperacaoFim = new Date(dtFim);
+
+            // Montar conteúdo da primeira coluna UC (limitando a descrição para melhor visualização)
+            const descricaoLimitada = dado.descricao.length > 40 ? 
+                dado.descricao.substring(0, 40) + '...' : dado.descricao;
+            
+            const ucContent = `${dado.uc} - ${descricaoLimitada}<br><br><strong>Período da ${dado.uc}:</strong><br>${dtInicio.toLocaleDateString('pt-BR')} até<br>${dtFim.toLocaleDateString('pt-BR')}`;
+
+            // Criar linhas das atividades
+            dado.entrega.forEach((atividade, index) => {
+                const tr = document.createElement('tr');
+                
+                if (index === 0) {
+                    const tdUC = document.createElement('td');
+                    tdUC.className = 'uc-cell';
+                    tdUC.innerHTML = ucContent;
+                    tdUC.rowSpan = dado.entrega.length + 2;
+                    tr.appendChild(tdUC);
+                }
+                
+                const tdAtividade = document.createElement('td');
+                tdAtividade.className = 'atividade-cell';
+                tdAtividade.textContent = atividade;
+                tr.appendChild(tdAtividade);
+                
+                const tdTipo = document.createElement('td');
+                tdTipo.className = 'tipo-cell';
+                tdTipo.textContent = dado.modelo[index] || 'Tarefa';
+                tr.appendChild(tdTipo);
+                
+                const tdDe = document.createElement('td');
+                tdDe.className = 'periodo-cell';
+                tdDe.textContent = index === 0 ? dtInicio.toLocaleDateString('pt-BR') : '-';
+                tr.appendChild(tdDe);
+                
+                const tdAte = document.createElement('td');
+                tdAte.className = 'periodo-cell';
+                tdAte.textContent = index === 0 ? dtEntregaFim.toLocaleDateString('pt-BR') : '-';
+                tr.appendChild(tdAte);
+                
+                tbody.appendChild(tr);
+            });
+
+            // Linha Menção Parcial
+            const trParcial = document.createElement('tr');
+            trParcial.className = 'parcial-row';
+            trParcial.innerHTML = `
+                <td>Registro da Menção Parcial</td>
+                <td>#N/D</td>
+                <td>${dtParcialInicio.toLocaleDateString('pt-BR')}</td>
+                <td>${dtParcialFim.toLocaleDateString('pt-BR')}</td>
+            `;
+            tbody.appendChild(trParcial);
+
+            // Linha Recuperação
+            const trRecup = document.createElement('tr');
+            trRecup.className = 'recuperacao-row';
+            trRecup.innerHTML = `
+                <td>Recuperação</td>
+                <td>#N/D</td>
+                <td>${dtRecuperacaoInicio.toLocaleDateString('pt-BR')}</td>
+                <td>${dtRecuperacaoFim.toLocaleDateString('pt-BR')}</td>
+            `;
+            tbody.appendChild(trRecup);
+
+            document.getElementById('cronogramaBox').style.display = 'block';
+            
+            console.log(`✅ Cronograma gerado para ${dado.uc} - ${dado.descricao}`);
+        }
+
+        // Inicializar aplicação quando a página carregar
+        document.addEventListener('DOMContentLoaded', inicializarApp);
+    </script>
+</body>
+</html>
