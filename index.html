@@ -98,9 +98,31 @@
             background: #003880;
         }
 
+        /* Botão de download específico */
+        .btn-download {
+            background: #28a745;
+            width: auto;
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 15px 15px 0 0;
+            font-size: 0.9em;
+        }
+
+        .btn-download:hover {
+            background: #218838;
+        }
+
         .cronograma-box {
             margin: 0;
             display: none;
+        }
+
+        /* Container para os botões de ação */
+        .actions-container {
+            padding: 15px;
+            text-align: left;
+            background: #f8f9fa;
+            border-top: 1px solid #e9ecef;
         }
 
         .cronograma-tabela {
@@ -288,6 +310,52 @@
         .cronograma-tabela tbody tr:last-child td:last-child {
             border-bottom-right-radius: 8px;
         }
+
+        /* Estilos para download - container que será capturado */
+        .download-container {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .download-header {
+            background: #1e5aa8;
+            color: #fff;
+            text-align: center;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            font-size: 1.2em;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .download-logo {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 30px;
+            width: auto;
+        }
+
+        .download-logo img {
+            height: 100%;
+            width: auto;
+            filter: brightness(0) invert(1);
+        }
+
+        .download-footer {
+            background: #1e5aa8;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            margin-top: 15px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            font-size: 0.85em;
+            line-height: 1.4;
+        }
     </style>
 </head>
 <body>
@@ -295,7 +363,7 @@
         <div class="header">
             <h1>CRONOGRAMA DE ESTUDOS</h1>
             <div class="logo">
-                <img src="Senac_logo.svg" alt="SENAC" onerror="this.style.display='none'; this.parentNode.innerHTML='SENAC';">
+                <img src="assets/images/Senac_logo.svg" alt="SENAC" onerror="this.style.display='none'; this.parentNode.innerHTML='SENAC';">
             </div>
         </div>
 
@@ -324,58 +392,92 @@
         </div>
 
         <div class="cronograma-box" id="cronogramaBox">
-            <table class="cronograma-tabela">
-                <thead>
-                    <tr>
-                        <th rowspan="2">Unidade Curricular<br>(UC)</th>
-                        <th rowspan="2">Atividade</th>
-                        <th rowspan="2">Tipo de entrega</th>
-                        <th colspan="2">Período de entrega</th>
-                    </tr>
-                    <tr>
-                        <th>De</th>
-                        <th>Até</th>
-                    </tr>
-                </thead>
-                <tbody id="cronogramaTbody">
-                    <tr>
-                        <td id="tdUC" class="uc-cell nd" rowspan="4">#N/D</td>
-                        <td id="tdAtividade" class="atividade-cell nd">#N/D</td>
-                        <td id="tdTipoEntrega" class="tipo-cell nd">#N/D</td>
-                        <td id="tdData" class="periodo-de-cell nd">#N/D</td>
-                        <td id="tdDataAte" class="periodo-ate-cell nd">#N/D</td>
-                    </tr>
-                    <tr class="parcial-row">
-                        <td colspan="2">Registro da Menção Parcial</td>
-                        <td>#N/D</td>
-                        <td>#N/D</td>
-                    </tr>
-                    <tr class="recuperacao-row">
-                        <td colspan="2">Recuperação</td>
-                        <td>#N/D</td>
-                        <td>#N/D</td>
-                    </tr>
-                    <tr class="encontro-row">
-                        <td colspan="2">
-                            <strong>Encontro com o(a) Tutor(a)</strong><br>
-                            <strong>(Horário de Brasília)</strong>
-                        </td>
-                        <td colspan="2">
-                            <span class="horarios">Terças-feiras - 18h às 19h<br>Quintas-feiras - 14h às 15h</span>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="actions-container">
+                <button type="button" id="btnDownload" class="btn-download">
+                    Baixar como Imagem
+                </button>
+            </div>
+            
+            <div id="downloadArea">
+                <div class="download-header" id="downloadHeader">
+                    CRONOGRAMA DE ESTUDOS - SENAC
+                    <div class="download-logo">
+                        <img src="assets/images/Senac_logo.svg" alt="SENAC" onerror="this.style.display='none'; this.parentNode.innerHTML='SENAC';">
+                    </div>
+                </div>
+                
+                <div class="curso-titulo" id="downloadCursoTitulo">
+                    <!-- Título do curso será preenchido dinamicamente -->
+                </div>
+                
+                <table class="cronograma-tabela">
+                    <thead>
+                        <tr>
+                            <th rowspan="2">Unidade Curricular<br>(UC)</th>
+                            <th rowspan="2">Atividade</th>
+                            <th rowspan="2">Tipo de entrega</th>
+                            <th colspan="2">Período de entrega</th>
+                        </tr>
+                        <tr>
+                            <th>De</th>
+                            <th>Até</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cronogramaTbody">
+                        <tr>
+                            <td id="tdUC" class="uc-cell nd" rowspan="4">#N/D</td>
+                            <td id="tdAtividade" class="atividade-cell nd">#N/D</td>
+                            <td id="tdTipoEntrega" class="tipo-cell nd">#N/D</td>
+                            <td id="tdData" class="periodo-de-cell nd">#N/D</td>
+                            <td id="tdDataAte" class="periodo-ate-cell nd">#N/D</td>
+                        </tr>
+                        <tr class="parcial-row">
+                            <td colspan="2">Registro da Menção Parcial</td>
+                            <td>#N/D</td>
+                            <td>#N/D</td>
+                        </tr>
+                        <tr class="recuperacao-row">
+                            <td colspan="2">Recuperação</td>
+                            <td>#N/D</td>
+                            <td>#N/D</td>
+                        </tr>
+                        <tr class="encontro-row">
+                            <td colspan="2">
+                                <strong>Encontro com o(a) Tutor(a)</strong><br>
+                                <strong>(Horário de Brasília)</strong>
+                            </td>
+                            <td colspan="2">
+                                <span class="horarios">Terças-feiras - 18h às 19h<br>Quintas-feiras - 14h às 15h</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="download-footer">
+                    Atenção! Administre seu tempo de estudos e seu processo de aprendizagem.<br>
+                    Sugerimos que você dedique 2h de estudos diárias para um bom desempenho no curso.
+                </div>
+            </div>
         </div>
 
         <div class="footer">
-            Atenção! Administre seu tempo de estudos e seu processo de aprendizagem.<br>
-            Sugerimos que você dedique 2h de estudos diárias para um bom desempenho no curso.
+            Atenção! Coloque a data inicial sempre em uma segunda-feira.<br>            
         </div>
     </div>
 
     <!-- Carregar dados externos -->
     <script src="dados_utf8.js" charset="UTF-8"></script>
+    
+    <!-- Biblioteca html2canvas para captura de tela com fallback -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" 
+            onerror="console.warn('CDN principal falhou, tentando CDN alternativa'); 
+                     var script = document.createElement('script'); 
+                     script.src = 'https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js'; 
+                     script.onerror = function() { 
+                         console.error('Todas as CDNs falharam'); 
+                         alert('Erro ao carregar biblioteca de captura. Verifique sua conexão.'); 
+                     }; 
+                     document.head.appendChild(script);"></script>
     
     <script>
         // Variável global para armazenar os dados processados
@@ -405,7 +507,7 @@
                 'Ãº': 'ú',
                 'Ã¢': 'â',
                 'Ã´': 'ô',
-                'Ã¼': 'ü',
+                'Ãü': 'ü',
                 'Ã±': 'ñ'
             };
             
@@ -415,6 +517,186 @@
             }
             
             return textoCorrigido;
+        }
+
+        // Função para baixar cronograma como imagem - versão aprimorada
+        function baixarCronogramaImagem() {
+            console.log('🚀 Iniciando captura da imagem...');
+            
+            // Verificar se o html2canvas está disponível
+            if (typeof html2canvas === 'undefined') {
+                alert('Erro: Biblioteca html2canvas não foi carregada. Verifique sua conexão com a internet.');
+                return;
+            }
+
+            const elemento = document.getElementById('downloadArea');
+            const curso = document.getElementById('curso').value;
+            const uc = document.getElementById('uc').value;
+            
+            // Validar se os elementos existem e têm conteúdo
+            if (!elemento) {
+                alert('Erro: Área de download não encontrada.');
+                return;
+            }
+
+            if (!curso || !uc) {
+                alert('Erro: Dados do curso ou UC não encontrados. Gere o cronograma primeiro.');
+                return;
+            }
+            
+            // Nome do arquivo mais seguro
+            const cursoLimpo = curso.replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_');
+            const ucLimpo = uc.replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_');
+            const dataAtual = new Date().toISOString().slice(0, 10);
+            const nomeArquivo = `cronograma_${cursoLimpo}_${ucLimpo}_${dataAtual}.png`;
+            
+            // Mostrar indicador de loading
+            const btnDownload = document.getElementById('btnDownload');
+            const textoOriginal = btnDownload.innerHTML;
+            btnDownload.innerHTML = 'Gerando...';
+            btnDownload.disabled = true;
+
+            // Aguardar um momento para renderização completa
+            setTimeout(() => {
+                // Configurações otimizadas para captura
+                const opcoes = {
+                    backgroundColor: '#ffffff',
+                    scale: 1.5, // Reduzindo scale para evitar problemas de memória
+                    useCORS: true,
+                    allowTaint: false, // Mudando para false para maior compatibilidade
+                    logging: true, // Ativar logs para debug
+                    removeContainer: false,
+                    imageTimeout: 15000, // Timeout de 15s para imagens
+                    onclone: function(clonedDoc) {
+                        // Remover elementos que podem causar problemas
+                        const svgs = clonedDoc.querySelectorAll('img[src*=".svg"]');
+                        svgs.forEach(svg => {
+                            // Substituir SVGs problemáticos por texto
+                            const parent = svg.parentNode;
+                            if (parent && svg.alt) {
+                                parent.innerHTML = svg.alt;
+                                parent.style.fontSize = '12px';
+                                parent.style.fontWeight = 'bold';
+                            }
+                        });
+                        console.log('🔧 Elemento clonado e processado');
+                    }
+                };
+
+                console.log('📸 Capturando elemento com html2canvas...');
+
+                // Capturar elemento como canvas com tratamento robusto de erros
+                html2canvas(elemento, opcoes)
+                    .then(canvas => {
+                        console.log('✅ Canvas criado com sucesso');
+                        
+                        try {
+                            // Verificar se o canvas foi criado corretamente
+                            if (!canvas || canvas.width === 0 || canvas.height === 0) {
+                                throw new Error('Canvas inválido ou vazio');
+                            }
+
+                            // Converter para blob primeiro (mais eficiente)
+                            canvas.toBlob(function(blob) {
+                                if (!blob) {
+                                    throw new Error('Falha ao criar blob da imagem');
+                                }
+
+                                // Criar URL temporária para o blob
+                                const url = URL.createObjectURL(blob);
+                                
+                                // Criar link para download
+                                const link = document.createElement('a');
+                                link.download = nomeArquivo;
+                                link.href = url;
+                                link.style.display = 'none';
+                                
+                                // Adicionar ao DOM, clicar e remover
+                                document.body.appendChild(link);
+                                link.click();
+                                
+                                // Limpeza
+                                setTimeout(() => {
+                                    document.body.removeChild(link);
+                                    URL.revokeObjectURL(url);
+                                }, 100);
+                                
+                                console.log('✅ Cronograma baixado como imagem:', nomeArquivo);
+                                
+                            }, 'image/png', 0.95);
+                            
+                        } catch (canvasError) {
+                            console.error('❌ Erro ao processar canvas:', canvasError);
+                            throw canvasError;
+                        }
+                    })
+                    .catch(error => {
+                        console.error('❌ Erro detalhado na captura:', error);
+                        
+                        // Mensagens de erro mais específicas
+                        let mensagemErro = 'Erro ao gerar a imagem. ';
+                        
+                        if (error.message.includes('NetworkError') || error.message.includes('CORS')) {
+                            mensagemErro += 'Problema com carregamento de recursos externos (CORS). Tente novamente.';
+                        } else if (error.message.includes('Canvas') || error.message.includes('canvas')) {
+                            mensagemErro += 'Problema na criação da imagem. Verifique se o cronograma está completamente carregado.';
+                        } else if (error.message.includes('Memory') || error.message.includes('memory')) {
+                            mensagemErro += 'Problema de memória. Tente fechar outras abas e gerar novamente.';
+                        } else {
+                            mensagemErro += `Detalhes: ${error.message}`;
+                        }
+                        
+                        alert(mensagemErro);
+                        
+                        // Fallback: tentar novamente com configurações mais simples
+                        console.log('🔄 Tentando fallback...');
+                        tentarFallbackSimples(elemento, nomeArquivo);
+                    })
+                    .finally(() => {
+                        // Restaurar botão
+                        btnDownload.innerHTML = textoOriginal;
+                        btnDownload.disabled = false;
+                    });
+                    
+            }, 500); // Aguardar 500ms para renderização completa
+        }
+
+        // Função fallback com configurações mais simples
+        function tentarFallbackSimples(elemento, nomeArquivo) {
+            const opcoesFallback = {
+                backgroundColor: '#ffffff',
+                scale: 1,
+                useCORS: false,
+                allowTaint: true,
+                logging: false,
+                removeContainer: true,
+                onclone: function(clonedDoc) {
+                    // Remover todos os SVGs para evitar problemas
+                    const svgs = clonedDoc.querySelectorAll('img');
+                    svgs.forEach(img => {
+                        if (img.src.includes('.svg')) {
+                            img.style.display = 'none';
+                        }
+                    });
+                }
+            };
+
+            html2canvas(elemento, opcoesFallback)
+                .then(canvas => {
+                    const link = document.createElement('a');
+                    link.download = nomeArquivo;
+                    link.href = canvas.toDataURL('image/png', 0.8);
+                    
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    
+                    console.log('✅ Cronograma baixado via fallback:', nomeArquivo);
+                })
+                .catch(fallbackError => {
+                    console.error('❌ Erro no fallback:', fallbackError);
+                    alert('Não foi possível gerar a imagem. Tente usar um navegador diferente ou capture a tela manualmente.');
+                });
         }
 
         // Função para inicializar a aplicação
@@ -470,6 +752,7 @@
             const selectCurso = document.getElementById('curso');
             const selectUC = document.getElementById('uc');
             const btnGerar = document.getElementById('btnGerar');
+            const btnDownload = document.getElementById('btnDownload');
             const cursoTitulo = document.getElementById('cursoTitulo');
 
             selectCurso.addEventListener('change', function () {
@@ -486,6 +769,7 @@
             });
 
             btnGerar.addEventListener('click', gerarCronograma);
+            btnDownload.addEventListener('click', baixarCronogramaImagem);
         }
 
         // Função para gerar o cronograma
@@ -503,6 +787,9 @@
                 alert('Por favor, preencha todos os campos');
                 return;
             }
+
+            // Atualizar título do download
+            document.getElementById('downloadCursoTitulo').textContent = curso;
 
             // Limpar e recriar tabela
             const tbody = document.getElementById('cronogramaTbody');
