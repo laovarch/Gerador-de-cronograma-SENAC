@@ -31,12 +31,12 @@
             border-radius: 15px 15px 0 0;
         }
 
-        .header h1 {
-            margin: 0;
-            font-size: 1.8em;
-            letter-spacing: 2px;
-            font-weight: bold;
-        }
+            .header h1 {
+                margin: 0;
+                font-size: 1.8em;
+                letter-spacing: 2px;
+                font-weight: bold;
+            }
 
         .logo {
             position: absolute;
@@ -47,11 +47,11 @@
             width: auto;
         }
 
-        .logo img {
-            height: 100%;
-            width: auto;
-            filter: brightness(0) invert(1);
-        }
+            .logo img {
+                height: 100%;
+                width: auto;
+                filter: brightness(0) invert(1);
+            }
 
         .curso-titulo {
             background: #e8e8e8;
@@ -74,7 +74,7 @@
             color: #1e5aa8;
         }
 
-        select, input[type="date"], button {
+        select, input[type="date"], input[type="time"], button {
             width: 100%;
             padding: 10px;
             margin-top: 6px;
@@ -94,9 +94,9 @@
             border-radius: 8px;
         }
 
-        button:hover {
-            background: #003880;
-        }
+            button:hover {
+                background: #003880;
+            }
 
         /* Botão de download específico */
         .btn-download {
@@ -108,9 +108,9 @@
             font-size: 0.9em;
         }
 
-        .btn-download:hover {
-            background: #218838;
-        }
+            .btn-download:hover {
+                background: #218838;
+            }
 
         .cronograma-box {
             margin: 0;
@@ -133,50 +133,50 @@
             margin: 0;
         }
 
-        .cronograma-tabela th {
-            background: #1e5aa8;
-            color: #fff;
-            padding: 12px 8px;
-            text-align: center;
-            font-size: 0.9em;
-            font-weight: bold;
-            border: 1px solid #fff;
-            vertical-align: middle;
-        }
+            .cronograma-tabela th {
+                background: #1e5aa8;
+                color: #fff;
+                padding: 12px 8px;
+                text-align: center;
+                font-size: 0.9em;
+                font-weight: bold;
+                border: 1px solid #fff;
+                vertical-align: middle;
+            }
 
-        .cronograma-tabela td {
-            text-align: center;
-            vertical-align: middle;
-            padding: 12px 8px;
-            font-size: 0.85em;
-            border: 1px solid #fff;
-        }
+            .cronograma-tabela td {
+                text-align: center;
+                vertical-align: middle;
+                padding: 12px 8px;
+                font-size: 0.85em;
+                border: 1px solid #fff;
+            }
 
-        /* Cabeçalhos específicos */
-        .cronograma-tabela th:nth-child(1) {
-            width: 200px;
-        }
+            /* Cabeçalhos específicos */
+            .cronograma-tabela th:nth-child(1) {
+                width: 200px;
+            }
 
-        .cronograma-tabela th:nth-child(2) {
-            width: 250px;
-        }
+            .cronograma-tabela th:nth-child(2) {
+                width: 250px;
+            }
 
-        .cronograma-tabela th:nth-child(3) {
-            width: 150px;
-        }
+            .cronograma-tabela th:nth-child(3) {
+                width: 150px;
+            }
 
-        .cronograma-tabela th:nth-child(4),
-        .cronograma-tabela th:nth-child(5) {
-            width: 100px;
-        }
+            .cronograma-tabela th:nth-child(4),
+            .cronograma-tabela th:nth-child(5) {
+                width: 100px;
+            }
 
-        /* Segunda linha do cabeçalho */
-        .cronograma-tabela thead tr:nth-child(2) th {
-            background: #1e5aa8;
-            color: #fff;
-            font-weight: bold;
-            font-size: 0.85em;
-        }
+            /* Segunda linha do cabeçalho */
+            .cronograma-tabela thead tr:nth-child(2) th {
+                background: #1e5aa8;
+                color: #fff;
+                font-weight: bold;
+                font-size: 0.85em;
+            }
 
         .uc-cell {
             background: #1e5aa8;
@@ -339,11 +339,11 @@
             width: auto;
         }
 
-        .download-logo img {
-            height: 100%;
-            width: auto;
-            filter: brightness(0) invert(1);
-        }
+            .download-logo img {
+                height: 100%;
+                width: auto;
+                filter: brightness(0) invert(1);
+            }
 
         .download-footer {
             background: #1e5aa8;
@@ -356,6 +356,56 @@
             font-size: 0.85em;
             line-height: 1.4;
         }
+
+        /* Estilos para campos de momento web */
+        .momento-web-container {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            padding: 8px;
+            background: #f8f9fa;
+            border: 1px solid #1e5aa8;
+            border-radius: 8px;
+            margin-top: 6px;
+        }
+
+            .momento-web-container select {
+                flex: 1;
+                margin: 0;
+                border: 1px solid #ccc;
+            }
+
+            .momento-web-container input[type="time"] {
+                flex: 0 0 auto;
+                width: 80px;
+                margin: 0;
+                border: 1px solid #ccc;
+            }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+            gap: 8px;
+        }
+
+            .checkbox-container input[type="checkbox"] {
+                width: auto;
+                margin: 0;
+            }
+
+        .segundo-momento {
+            margin-top: 10px;
+            padding: 10px;
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            display: none;
+        }
+
+            .segundo-momento.ativo {
+                display: block;
+            }
     </style>
 </head>
 <body>
@@ -387,6 +437,46 @@
                 <label for="dataInicio">Dia de início da UC</label>
                 <input type="date" id="dataInicio" name="dataInicio" required>
 
+                <!-- Configuração do Momento Web -->
+                <label>Primeiro Momento Web com o(a) Tutor(a)</label>
+                <div class="momento-web-container">
+                    <select id="diaSemana1" name="diaSemana1" required>
+                        <option value="">Selecione o dia</option>
+                        <option value="Segunda-feira">Segunda-feira</option>
+                        <option value="Terça-feira" selected>Terça-feira</option>
+                        <option value="Quarta-feira">Quarta-feira</option>
+                        <option value="Quinta-feira">Quinta-feira</option>
+                        <option value="Sexta-feira">Sexta-feira</option>
+                        <option value="Sábado">Sábado</option>
+                    </select>
+                    <input type="time" id="horarioInicio1" name="horarioInicio1" value="18:00" required>
+                    <span>às</span>
+                    <input type="time" id="horarioFim1" name="horarioFim1" value="19:00" required>
+                </div>
+
+                <div class="checkbox-container">
+                    <input type="checkbox" id="segundoMomento" name="segundoMomento">
+                    <label for="segundoMomento">Adicionar segundo momento web</label>
+                </div>
+
+                <div id="segundoMomentoContainer" class="segundo-momento">
+                    <label>Segundo Momento Web com o(a) Tutor(a)</label>
+                    <div class="momento-web-container">
+                        <select id="diaSemana2" name="diaSemana2">
+                            <option value="">Selecione o dia</option>
+                            <option value="Segunda-feira">Segunda-feira</option>
+                            <option value="Terça-feira">Terça-feira</option>
+                            <option value="Quarta-feira">Quarta-feira</option>
+                            <option value="Quinta-feira" selected>Quinta-feira</option>
+                            <option value="Sexta-feira">Sexta-feira</option>
+                            <option value="Sábado">Sábado</option>
+                        </select>
+                        <input type="time" id="horarioInicio2" name="horarioInicio2" value="14:00">
+                        <span>às</span>
+                        <input type="time" id="horarioFim2" name="horarioFim2" value="15:00">
+                    </div>
+                </div>
+
                 <button type="button" id="btnGerar">Gerar Cronograma</button>
             </form>
         </div>
@@ -394,10 +484,10 @@
         <div class="cronograma-box" id="cronogramaBox">
             <div class="actions-container">
                 <button type="button" id="btnDownload" class="btn-download">
-                    Baixar como Imagem
+                    Baixar como imagem
                 </button>
             </div>
-            
+
             <div id="downloadArea">
                 <div class="download-header" id="downloadHeader">
                     CRONOGRAMA DE ESTUDOS - SENAC
@@ -405,11 +495,11 @@
                         <img src="assets/images/Senac_logo.svg" alt="SENAC" onerror="this.style.display='none'; this.parentNode.innerHTML='SENAC';">
                     </div>
                 </div>
-                
+
                 <div class="curso-titulo" id="downloadCursoTitulo">
                     <!-- Título do curso será preenchido dinamicamente -->
                 </div>
-                
+
                 <table class="cronograma-tabela">
                     <thead>
                         <tr>
@@ -446,13 +536,13 @@
                                 <strong>Encontro com o(a) Tutor(a)</strong><br>
                                 <strong>(Horário de Brasília)</strong>
                             </td>
-                            <td colspan="2">
+                            <td colspan="2" id="horariosEncontro">
                                 <span class="horarios">Terças-feiras - 18h às 19h<br>Quintas-feiras - 14h às 15h</span>
                             </td>
                         </tr>
                     </tbody>
                 </table>
-                
+
                 <div class="download-footer">
                     Atenção! Administre seu tempo de estudos e seu processo de aprendizagem.<br>
                     Sugerimos que você dedique 2h de estudos diárias para um bom desempenho no curso.
@@ -461,24 +551,24 @@
         </div>
 
         <div class="footer">
-            Atenção! Coloque a data inicial sempre em uma segunda-feira.<br>            
+            Atenção! Coloque a data inicial sempre em uma segunda-feira.<br>
         </div>
     </div>
 
     <!-- Carregar dados externos -->
     <script src="dados_utf8.js" charset="UTF-8"></script>
-    
+
     <!-- Biblioteca html2canvas para captura de tela com fallback -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" 
-            onerror="console.warn('CDN principal falhou, tentando CDN alternativa'); 
-                     var script = document.createElement('script'); 
-                     script.src = 'https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js'; 
-                     script.onerror = function() { 
-                         console.error('Todas as CDNs falharam'); 
-                         alert('Erro ao carregar biblioteca de captura. Verifique sua conexão.'); 
-                     }; 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
+            onerror="console.warn('CDN principal falhou, tentando CDN alternativa');
+                     var script = document.createElement('script');
+                     script.src = 'https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js';
+                     script.onerror = function() {
+                         console.error('Todas as CDNs falharam');
+                         alert('Erro ao carregar biblioteca de captura. Verifique sua conexão.');
+                     };
                      document.head.appendChild(script);"></script>
-    
+
     <script>
         // Variável global para armazenar os dados processados
         let dados = [];
@@ -486,14 +576,14 @@
         // Função para normalizar texto (remover acentos e caracteres especiais para comparação)
         function normalizarTexto(texto) {
             return texto.toLowerCase()
-                        .normalize('NFD')
-                        .replace(/[\u0300-\u036f]/g, '');
+                .normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '');
         }
 
         // Função para sanitizar e corrigir caracteres especiais
         function corrigirCaracteresEspeciais(texto) {
             if (!texto) return '';
-            
+
             // Mapeamento de caracteres mal codificados comuns
             const correcoes = {
                 'Ã§': 'ç',
@@ -510,19 +600,52 @@
                 'Ãü': 'ü',
                 'Ã±': 'ñ'
             };
-            
+
             let textoCorrigido = texto;
             for (const [incorreto, correto] of Object.entries(correcoes)) {
                 textoCorrigido = textoCorrigido.replace(new RegExp(incorreto, 'g'), correto);
             }
-            
+
             return textoCorrigido;
+        }
+
+        // Função para formatar horário (de HH:MM para HHh)
+        function formatarHorario(horario) {
+            if (!horario) return '';
+            return horario.replace(':', 'h');
+        }
+
+        // Função para gerar string de horários dos momentos web
+        function gerarHorariosEncontro() {
+            const dia1 = document.getElementById('diaSemana1')?.value || '';
+            const horarioInicio1 = document.getElementById('horarioInicio1')?.value || '';
+            const horarioFim1 = document.getElementById('horarioFim1')?.value || '';
+
+            const segundoMomentoAtivo = document.getElementById('segundoMomento')?.checked || false;
+            const dia2 = document.getElementById('diaSemana2')?.value || '';
+            const horarioInicio2 = document.getElementById('horarioInicio2')?.value || '';
+            const horarioFim2 = document.getElementById('horarioFim2')?.value || '';
+
+            let horariosTexto = '';
+
+            if (dia1 && horarioInicio1 && horarioFim1) {
+                horariosTexto += `${dia1}s - ${formatarHorario(horarioInicio1)} às ${formatarHorario(horarioFim1)}`;
+            }
+
+            if (segundoMomentoAtivo && dia2 && horarioInicio2 && horarioFim2) {
+                if (horariosTexto) {
+                    horariosTexto += '<br>';
+                }
+                horariosTexto += `${dia2}s - ${formatarHorario(horarioInicio2)} às ${formatarHorario(horarioFim2)}`;
+            }
+
+            return horariosTexto || 'Terças-feiras - 18h às 19h<br>Quintas-feiras - 14h às 15h';
         }
 
         // Função para baixar cronograma como imagem - versão aprimorada
         function baixarCronogramaImagem() {
             console.log('🚀 Iniciando captura da imagem...');
-            
+
             // Verificar se o html2canvas está disponível
             if (typeof html2canvas === 'undefined') {
                 alert('Erro: Biblioteca html2canvas não foi carregada. Verifique sua conexão com a internet.');
@@ -532,7 +655,7 @@
             const elemento = document.getElementById('downloadArea');
             const curso = document.getElementById('curso').value;
             const uc = document.getElementById('uc').value;
-            
+
             // Validar se os elementos existem e têm conteúdo
             if (!elemento) {
                 alert('Erro: Área de download não encontrada.');
@@ -543,13 +666,13 @@
                 alert('Erro: Dados do curso ou UC não encontrados. Gere o cronograma primeiro.');
                 return;
             }
-            
+
             // Nome do arquivo mais seguro
             const cursoLimpo = curso.replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_');
             const ucLimpo = uc.replace(/[^a-zA-Z0-9\s]/g, '').replace(/\s+/g, '_');
             const dataAtual = new Date().toISOString().slice(0, 10);
             const nomeArquivo = `cronograma_${cursoLimpo}_${ucLimpo}_${dataAtual}.png`;
-            
+
             // Mostrar indicador de loading
             const btnDownload = document.getElementById('btnDownload');
             const textoOriginal = btnDownload.innerHTML;
@@ -567,7 +690,7 @@
                     logging: true, // Ativar logs para debug
                     removeContainer: false,
                     imageTimeout: 15000, // Timeout de 15s para imagens
-                    onclone: function(clonedDoc) {
+                    onclone: function (clonedDoc) {
                         // Remover elementos que podem causar problemas
                         const svgs = clonedDoc.querySelectorAll('img[src*=".svg"]');
                         svgs.forEach(svg => {
@@ -589,7 +712,7 @@
                 html2canvas(elemento, opcoes)
                     .then(canvas => {
                         console.log('✅ Canvas criado com sucesso');
-                        
+
                         try {
                             // Verificar se o canvas foi criado corretamente
                             if (!canvas || canvas.width === 0 || canvas.height === 0) {
@@ -597,34 +720,34 @@
                             }
 
                             // Converter para blob primeiro (mais eficiente)
-                            canvas.toBlob(function(blob) {
+                            canvas.toBlob(function (blob) {
                                 if (!blob) {
                                     throw new Error('Falha ao criar blob da imagem');
                                 }
 
                                 // Criar URL temporária para o blob
                                 const url = URL.createObjectURL(blob);
-                                
+
                                 // Criar link para download
                                 const link = document.createElement('a');
                                 link.download = nomeArquivo;
                                 link.href = url;
                                 link.style.display = 'none';
-                                
+
                                 // Adicionar ao DOM, clicar e remover
                                 document.body.appendChild(link);
                                 link.click();
-                                
+
                                 // Limpeza
                                 setTimeout(() => {
                                     document.body.removeChild(link);
                                     URL.revokeObjectURL(url);
                                 }, 100);
-                                
+
                                 console.log('✅ Cronograma baixado como imagem:', nomeArquivo);
-                                
+
                             }, 'image/png', 0.95);
-                            
+
                         } catch (canvasError) {
                             console.error('❌ Erro ao processar canvas:', canvasError);
                             throw canvasError;
@@ -632,10 +755,10 @@
                     })
                     .catch(error => {
                         console.error('❌ Erro detalhado na captura:', error);
-                        
+
                         // Mensagens de erro mais específicas
                         let mensagemErro = 'Erro ao gerar a imagem. ';
-                        
+
                         if (error.message.includes('NetworkError') || error.message.includes('CORS')) {
                             mensagemErro += 'Problema com carregamento de recursos externos (CORS). Tente novamente.';
                         } else if (error.message.includes('Canvas') || error.message.includes('canvas')) {
@@ -645,9 +768,9 @@
                         } else {
                             mensagemErro += `Detalhes: ${error.message}`;
                         }
-                        
+
                         alert(mensagemErro);
-                        
+
                         // Fallback: tentar novamente com configurações mais simples
                         console.log('🔄 Tentando fallback...');
                         tentarFallbackSimples(elemento, nomeArquivo);
@@ -657,7 +780,7 @@
                         btnDownload.innerHTML = textoOriginal;
                         btnDownload.disabled = false;
                     });
-                    
+
             }, 500); // Aguardar 500ms para renderização completa
         }
 
@@ -670,7 +793,7 @@
                 allowTaint: true,
                 logging: false,
                 removeContainer: true,
-                onclone: function(clonedDoc) {
+                onclone: function (clonedDoc) {
                     // Remover todos os SVGs para evitar problemas
                     const svgs = clonedDoc.querySelectorAll('img');
                     svgs.forEach(img => {
@@ -686,11 +809,11 @@
                     const link = document.createElement('a');
                     link.download = nomeArquivo;
                     link.href = canvas.toDataURL('image/png', 0.8);
-                    
+
                     document.body.appendChild(link);
                     link.click();
                     document.body.removeChild(link);
-                    
+
                     console.log('✅ Cronograma baixado via fallback:', nomeArquivo);
                 })
                 .catch(fallbackError => {
@@ -729,7 +852,7 @@
 
             } catch (error) {
                 console.error('❌ Erro ao carregar a aplicação:', error);
-                document.getElementById('loading').innerHTML = 
+                document.getElementById('loading').innerHTML =
                     '<div class="error-message">Erro ao carregar os dados. Verifique se o arquivo dados.js está disponível e o encoding está correto.</div>';
             }
         }
@@ -738,7 +861,7 @@
         function preencherCursos() {
             const selectCurso = document.getElementById('curso');
             const cursosUnicos = [...new Set(dados.map(d => d.curso.trim()))].filter(curso => curso);
-            
+
             cursosUnicos.forEach(curso => {
                 const opt = document.createElement('option');
                 opt.value = curso;
@@ -759,13 +882,25 @@
                 const curso = this.value.trim();
                 cursoTitulo.textContent = curso || 'Selecione um curso para visualizar o cronograma';
                 selectUC.innerHTML = '<option value="">Selecione a UC</option>';
-                
+
                 dados.filter(d => d.curso.trim() === curso).forEach(d => {
                     const opt = document.createElement('option');
                     opt.value = d.uc;
                     opt.textContent = `${d.uc} - ${d.descricao}`;
                     selectUC.appendChild(opt);
                 });
+            });
+
+            // Controlar exibição do segundo momento web
+            const segundoMomentoCheckbox = document.getElementById('segundoMomento');
+            const segundoMomentoContainer = document.getElementById('segundoMomentoContainer');
+
+            segundoMomentoCheckbox?.addEventListener('change', function () {
+                if (this.checked) {
+                    segundoMomentoContainer?.classList.add('ativo');
+                } else {
+                    segundoMomentoContainer?.classList.remove('ativo');
+                }
             });
 
             btnGerar.addEventListener('click', gerarCronograma);
@@ -777,15 +912,38 @@
             const curso = document.getElementById('curso').value;
             const ucValue = document.getElementById('uc').value;
             const dataInicio = document.getElementById('dataInicio').value;
-            
+
             const dado = dados.find(
                 d => normalizarTexto(d.curso) === normalizarTexto(curso) &&
-                     normalizarTexto(d.uc) === normalizarTexto(ucValue)
+                    normalizarTexto(d.uc) === normalizarTexto(ucValue)
             );
-            
+
             if (!dado || !dataInicio) {
-                alert('Por favor, preencha todos os campos');
+                alert('Por favor, preencha todos os campos obrigatórios');
                 return;
+            }
+
+            // Verificar campos do primeiro momento web
+            const dia1 = document.getElementById('diaSemana1')?.value;
+            const horarioInicio1 = document.getElementById('horarioInicio1')?.value;
+            const horarioFim1 = document.getElementById('horarioFim1')?.value;
+
+            if (!dia1 || !horarioInicio1 || !horarioFim1) {
+                alert('Por favor, preencha todos os campos do primeiro momento web');
+                return;
+            }
+
+            // Verificar se o segundo momento está ativado e se tem dados
+            const segundoMomentoAtivo = document.getElementById('segundoMomento')?.checked;
+            if (segundoMomentoAtivo) {
+                const dia2 = document.getElementById('diaSemana2')?.value;
+                const horarioInicio2 = document.getElementById('horarioInicio2')?.value;
+                const horarioFim2 = document.getElementById('horarioFim2')?.value;
+
+                if (!dia2 || !horarioInicio2 || !horarioFim2) {
+                    alert('Por favor, preencha todos os campos do segundo momento web');
+                    return;
+                }
             }
 
             // Atualizar título do download
@@ -799,22 +957,22 @@
             const partesData = dataInicio.split('-');
             const dtInicio = new Date(parseInt(partesData[0]), parseInt(partesData[1]) - 1, parseInt(partesData[2]));
             const numeroSemanas = parseInt(dado.semanas);
-            
+
             const dtFim = new Date(dtInicio);
             dtFim.setDate(dtFim.getDate() + ((numeroSemanas + 1) * 7));
-            
+
             const dtEntregaFim = new Date(dtInicio);
             dtEntregaFim.setDate(dtEntregaFim.getDate() + ((numeroSemanas - 1) * 7));
-            
+
             const dtParcialInicio = new Date(dtEntregaFim);
             dtParcialInicio.setDate(dtParcialInicio.getDate() + 1);
-            
+
             const dtParcialFim = new Date(dtParcialInicio);
             dtParcialFim.setDate(dtParcialFim.getDate() + 3);
-            
+
             const dtRecuperacaoInicio = new Date(dtEntregaFim);
             dtRecuperacaoInicio.setDate(dtRecuperacaoInicio.getDate() + 7);
-            
+
             const dtRecuperacaoFim = new Date(dtFim);
 
             // Montar conteúdo da primeira coluna UC
@@ -822,77 +980,81 @@
 
             // Criar primeira linha principal com todas as atividades
             const row1 = document.createElement('tr');
-            
+
             // UC com rowspan=4 (incluindo todas as 4 linhas)
             const tdUC = document.createElement('td');
             tdUC.className = 'uc-cell';
             tdUC.innerHTML = ucContent;
             tdUC.rowSpan = 4;
             row1.appendChild(tdUC);
-            
+
             // Atividades - todas em uma célula com quebras de linha
             const tdAtividades = document.createElement('td');
             tdAtividades.className = 'atividade-cell';
             tdAtividades.innerHTML = dado.entrega.join('<br>');
             row1.appendChild(tdAtividades);
-            
+
             // Tipos - todos em uma célula com quebras de linha
             const tdTipos = document.createElement('td');
             tdTipos.className = 'tipo-cell';
             tdTipos.innerHTML = dado.modelo.map(modelo => modelo || 'Tarefa').join('<br>');
             row1.appendChild(tdTipos);
-            
+
             // Data De
             const tdDe = document.createElement('td');
             tdDe.className = 'periodo-de-cell';
             tdDe.textContent = dtInicio.toLocaleDateString('pt-BR');
             row1.appendChild(tdDe);
-            
+
             // Data Até
             const tdAte = document.createElement('td');
             tdAte.className = 'periodo-ate-cell';
             tdAte.textContent = dtEntregaFim.toLocaleDateString('pt-BR');
             row1.appendChild(tdAte);
-            
+
             tbody.appendChild(row1);
 
             // Linha Menção Parcial
             const row2 = document.createElement('tr');
             row2.className = 'parcial-row';
             row2.innerHTML = `
-                <td colspan="2">Registro da Menção Parcial</td>
-                <td>${dtParcialInicio.toLocaleDateString('pt-BR')}</td>
-                <td>${dtParcialFim.toLocaleDateString('pt-BR')}</td>
-            `;
+                    <td colspan="2">Registro da Menção Parcial</td>
+                    <td>${dtParcialInicio.toLocaleDateString('pt-BR')}</td>
+                    <td>${dtParcialFim.toLocaleDateString('pt-BR')}</td>
+                `;
             tbody.appendChild(row2);
 
             // Linha Recuperação
             const row3 = document.createElement('tr');
             row3.className = 'recuperacao-row';
             row3.innerHTML = `
-                <td colspan="2">Recuperação</td>
-                <td>${dtRecuperacaoInicio.toLocaleDateString('pt-BR')}</td>
-                <td>${dtRecuperacaoFim.toLocaleDateString('pt-BR')}</td>
-            `;
+                    <td colspan="2">Recuperação</td>
+                    <td>${dtRecuperacaoInicio.toLocaleDateString('pt-BR')}</td>
+                    <td>${dtRecuperacaoFim.toLocaleDateString('pt-BR')}</td>
+                `;
             tbody.appendChild(row3);
 
-            // Linha Encontro com Tutor (quarta linha)
+            // Linha Encontro com Tutor (quarta linha) - agora com horários personalizados
             const row4 = document.createElement('tr');
             row4.className = 'encontro-row';
+
+            const horariosPersonalizados = gerarHorariosEncontro();
+
             row4.innerHTML = `
-                <td colspan="2">
-                    <strong>Encontro com o(a) Tutor(a)</strong><br>
-                    <strong>(Horário de Brasília)</strong>
-                </td>
-                <td colspan="2">
-                    <span class="horarios">Terças-feiras - 18h às 19h<br>Quintas-feiras - 14h às 15h</span>
-                </td>
-            `;
+                    <td colspan="2">
+                        <strong>Encontro com o(a) Tutor(a)</strong><br>
+                        <strong>(Horário de Brasília)</strong>
+                    </td>
+                    <td colspan="2">
+                        <span class="horarios">${horariosPersonalizados}</span>
+                    </td>
+                `;
             tbody.appendChild(row4);
 
             document.getElementById('cronogramaBox').style.display = 'block';
-            
+
             console.log(`✅ Cronograma gerado para ${dado.uc} - ${dado.descricao}`);
+            console.log(`📅 Horários personalizados: ${horariosPersonalizados.replace('<br>', ' | ')}`);
         }
 
         // Inicializar aplicação quando a página carregar
