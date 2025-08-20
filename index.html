@@ -406,6 +406,17 @@
             .segundo-momento.ativo {
                 display: block;
             }
+
+        #textoAlternativoContainer {
+            display: none;
+            background: #f1f1f1;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            margin-top: 10px;
+            white-space: pre-wrap;
+            font-family: monospace;
+        }
     </style>
 </head>
 <body>
@@ -552,6 +563,10 @@
 
         <div class="footer">
             Atenção! Coloque a data inicial sempre em uma segunda-feira.<br>
+        </div>
+
+        <!-- Adicionando o container para o texto alternativo -->
+        <div id="textoAlternativoContainer" style="display: none; background: #f1f1f1; border: 1px solid #ddd; border-radius: 8px; padding: 10px; margin-top: 10px; white-space: pre-wrap; font-family: monospace;">
         </div>
     </div>
 
@@ -821,6 +836,91 @@
                     alert('Não foi possível gerar a imagem. Tente usar um navegador diferente ou capture a tela manualmente.');
                 });
         }
+
+        // Função para gerar texto alternativo para a imagem
+        function gerarTextoAlternativo() {
+            const curso = document.getElementById('curso').value;
+            const ucValue = document.getElementById('uc').value;
+            const dataInicio = document.getElementById('dataInicio').value;
+
+            const dado = dados.find(
+                d => normalizarTexto(d.curso) === normalizarTexto(curso) &&
+                    normalizarTexto(d.uc) === normalizarTexto(ucValue)
+            );
+
+            if (!dado || !dataInicio) {
+                alert('Por favor, preencha todos os campos obrigatórios antes de gerar o texto alternativo');
+                return;
+            }
+
+            const partesData = dataInicio.split('-');
+            const dtInicio = new Date(parseInt(partesData[0]), parseInt(partesData[1]) - 1, parseInt(partesData[2]));
+            const numeroSemanas = parseInt(dado.semanas);
+
+            const dtFim = new Date(dtInicio);
+            dtFim.setDate(dtFim.getDate() + ((numeroSemanas + 1) * 7));
+
+            const dtEntregaFim = new Date(dtInicio);
+            dtEntregaFim.setDate(dtEntregaFim.getDate() + ((numeroSemanas - 1) * 7));
+
+            const dtParcialInicio = new Date(dtEntregaFim);
+            dtParcialInicio.setDate(dtParcialInicio.getDate() + 1);
+
+            const dtParcialFim = new Date(dtParcialInicio);
+            dtParcialFim.setDate(dtParcialFim.getDate() + 3);
+
+            const dtRecuperacaoInicio = new Date(dtEntregaFim);
+            dtRecuperacaoInicio.setDate(dtRecuperacaoInicio.getDate() + 7);
+
+            const dtRecuperacaoFim = new Date(dtFim);
+
+            const dia1 = document.getElementById('diaSemana1')?.value;
+            const horarioInicio1 = document.getElementById('horarioInicio1')?.value;
+            const horarioFim1 = document.getElementById('horarioFim1')?.value;
+
+            const segundoMomentoAtivo = document.getElementById('segundoMomento')?.checked;
+            const dia2 = document.getElementById('diaSemana2')?.value;
+            const horarioInicio2 = document.getElementById('horarioInicio2')?.value;
+            const horarioFim2 = document.getElementById('horarioFim2')?.value;
+
+            let momentosOnline = `${dia1} das ${formatarHorario(horarioInicio1)} às ${formatarHorario(horarioFim1)}`;
+
+            if (segundoMomentoAtivo && dia2 && horarioInicio2 && horarioFim2) {
+                momentosOnline += ` e ${dia2} das ${formatarHorario(horarioInicio2)} às ${formatarHorario(horarioFim2)}`;
+            }
+
+            const textoAlternativo = `Unidade Curricular (UC) do curso ${curso}\n\n` +
+                `${dado.uc} - ${dado.descricao}\n\n` +
+                `Período da ${dado.uc}: ${dtInicio.toLocaleDateString('pt-BR')} até ${dtFim.toLocaleDateString('pt-BR')}\n\n` +
+                `A ${dado.uc} possui ${dado.entrega.length} atividades\n\n` +
+                `PERÍODO DE ENTREGA DAS ATIVIDADES: ${dtInicio.toLocaleDateString('pt-BR')} até ${dtEntregaFim.toLocaleDateString('pt-BR')}\n` +
+                `REGISTRO DE MENÇÃO PARCIAL: ${dtParcialInicio.toLocaleDateString('pt-BR')} até ${dtParcialFim.toLocaleDateString('pt-BR')}\n` +
+                `RECUPERAÇÕES: ${dtRecuperacaoInicio.toLocaleDateString('pt-BR')} até ${dtRecuperacaoFim.toLocaleDateString('pt-BR')}\n` +
+                `TÉRMINO DA ${dado.uc} EM ${dtFim.toLocaleDateString('pt-BR')}\n\n` +
+                `Momento On-Line ${momentosOnline}\n(Horário de Brasília)`;
+
+            // Exibir o texto alternativo em um elemento HTML
+            const textoAlternativoContainer = document.getElementById('textoAlternativoContainer');
+            textoAlternativoContainer.textContent = textoAlternativo;
+            textoAlternativoContainer.style.display = 'block';
+            textoAlternativoContainer.style.visibility = 'visible';
+            textoAlternativoContainer.style.opacity = '1'; // Garantir visibilidade
+            textoAlternativoContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Adicionar botão para gerar texto alternativo
+        document.addEventListener('DOMContentLoaded', function () {
+            const btnTextoAlternativo = document.createElement('button');
+            btnTextoAlternativo.textContent = 'Gerar Texto Alternativo';
+            btnTextoAlternativo.type = 'button';
+            btnTextoAlternativo.style.marginLeft = '10px';
+            btnTextoAlternativo.addEventListener('click', gerarTextoAlternativo);
+
+            const actionsContainer = document.querySelector('.actions-container');
+            if (actionsContainer) {
+                actionsContainer.appendChild(btnTextoAlternativo);
+            }
+        });
 
         // Função para inicializar a aplicação
         function inicializarApp() {
